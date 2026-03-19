@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.7z
 
 # Virtual environment (VERY IMPORTANT)
 .venv/
