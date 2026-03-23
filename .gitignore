@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.7z
+pdf.py
+dominos_pizza.py
 
 # Virtual environment (VERY IMPORTANT)
 .venv/

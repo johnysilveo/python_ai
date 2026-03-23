@@ -1,5 +1,7 @@
 import time
 
+
+
 def il_ristorante():
     menus = {
         "Appetizers": {
@@ -152,7 +154,6 @@ def il_ristorante():
     print("=" * 90)
     print(f"{'FINAL TOTAL: $' + format(final_total, '.2f'):^90}")
     print("=" * 90)
-
 
 il_ristorante()
 
