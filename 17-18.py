@@ -38,13 +38,13 @@ def if_palindrome():
         return False
 
 
-# reserved_words = {"hello","goodbye","my","name","city"}
-# print("=" * 90)
-# print(f"{'Enter some text':^90}")
-# user_text = input("_" *43 + ">")
-# pattern = r"\b(hello|goodbye|my|name|city)\b"
-# cleaned_user_text = re.sub(pattern, lambda match: match.group().upper(),user_text)
-# print(f"{f'{cleaned_user_text}':^90}")
+reserved_words = {"hello","goodbye","my","name","city"}
+print("=" * 90)
+print(f"{'Enter some text':^90}")
+user_text = input("_" *43 + ">")
+pattern = r"\b(hello|goodbye|my|name|city)\b"
+cleaned_user_text = re.sub(pattern, lambda match: match.group().upper(),user_text)
+print(f"{f'{cleaned_user_text}':^90}")
 
 def find_and_delete():
     reserved_words = {"hello", "goodbye", "my", "name", "city"}
