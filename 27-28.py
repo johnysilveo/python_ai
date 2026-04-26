@@ -1,3 +1,7 @@
+import json
+
+
+
 # Створіть програму, що містить інформацію про відомих баскетболістів.
 # Збережіть ПІБ та зріст кожного баскетболіста.
 # Реалізуйте можливість додавати, видаляти, знаходити та змінювати дані.
@@ -8,6 +12,20 @@ basketball_players = {
     "LeBron James": 206,
     "Kobe Bryant": 198
 }
+
+def save_data_basketball_players(players):
+    with open("data/basketball_players.json", "w") as file:
+        json.dump(players, file, indent=4)
+
+def load_data_basketball_players():
+    try:
+        with open("data/basketball_players.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return basketball_players
+
+basketball_players = load_data_basketball_players()
+
 def user_input():
     print("Please enter name of player".center(90))
     user_input_name = input("_"*43+">").strip()
@@ -65,12 +83,15 @@ def menu_input():
             break
         elif choise == "1":
             add_players(basketball_players)
+            save_data_basketball_players(basketball_players)
         elif choise == "2":
             remove_players(basketball_players)
+            save_data_basketball_players(basketball_players)
         elif choise == "3":
             find_player(basketball_players)
         elif choise == "4":
             change_player(basketball_players)
+            save_data_basketball_players(basketball_players)
         elif choise == "5":
             print(basketball_players)
         else:
@@ -88,6 +109,19 @@ english_french = {
     "cat": "chat",
     "dog": "chien"
 }
+
+def save_data_english_french(words):
+    with open("data/english_french.json", "w") as file:
+        json.dump(words, file, indent=4)
+
+def load_data_english_french():
+    try:
+        with open("data/english_french.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return english_french
+
+english_french = load_data_english_french()
 
 def user_input_word():
     print("Please enter english word".center(90))
@@ -146,12 +180,15 @@ def menu_input_word():
             break
         elif choice == "1":
             add_word(english_french)
+            save_data_english_french(english_french)
         elif choice == "2":
             remove_word(english_french)
+            save_data_english_french(english_french)
         elif choice == "3":
             find_word(english_french)
         elif choice == "4":
             change_word(english_french)
+            save_data_english_french(english_french)
         elif choice == "5":
             for english, french in english_french.items():
                 print(f"{english.capitalize()} -> {french.capitalize()}")
@@ -205,6 +242,19 @@ company = {
         "skype": "david.miller"
     }
 }
+
+def save_data_workers(workers):
+    with open("data/workers.json", "w") as file:
+        json.dump(workers, file, indent=4)
+
+def load_data_workers():
+    try:
+        with open("data/workers.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return company
+
+company = load_data_workers()
 
 def find_worker(workers):
     print("\tPlease enter a name".center(90))
@@ -302,12 +352,15 @@ def menu_input_company():
             break
         elif choice == "1":
             add_worker(company)
+            save_data_workers(company)
         elif choice == "2":
             remove_employee(company)
+            save_data_workers(company)
         elif choice == "3":
             find_worker(company)
         elif choice == "4":
             change_worker_info(company)
+            save_data_workers(company)
         elif choice == "5":
             list_all_worker(company)
         else:
@@ -357,6 +410,19 @@ books = {
         "publisher": "Bloomsbury"
     }
 }
+
+def save_data_book(libras):
+    with open("data/books.json", "w") as file:
+        json.dump(libras, file, indent=4)
+
+def load_data_book():
+    try:
+        with open("data/books.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return books
+
+books = load_data_book()
 
 def find_book(libras):
     print("\tPlease enter a name".center(90))
@@ -459,12 +525,15 @@ def menu_input_books():
             break
         elif choice == "1":
             add_book(books)
+            save_data_book(books)
         elif choice == "2":
             remove_book(books)
+            save_data_book(books)
         elif choice == "3":
             find_book(books)
         elif choice == "4":
             change_book_info(books)
+            save_data_book(books)
         elif choice == "5":
             list_all_books(books)
         else:
