@@ -4,9 +4,9 @@ import random
 
 numbers1,numbers2,numbers3 = [],[],[]
 for number in range(random.randint(1,30)):
-    numbers1.append(random.randint(1,30))
-    numbers2.append(random.randint(1,30))
-    numbers3.append(random.randint(1,30))
+    numbers1.append(random.randint(1,20))
+    numbers2.append(random.randint(1,20))
+    numbers3.append(random.randint(1,20))
 tuple_1 = tuple(numbers1)
 tuple_2 = tuple(numbers2)
 tuple_3 = tuple(numbers3)
