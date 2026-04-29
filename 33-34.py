@@ -78,7 +78,7 @@ print_results(numbers,
 # вивести кількість зроблених користувачем спроб. У програмі необхідно використовувати рекурсію.
 
 magic_number = str(random.randint(1000, 9999))
-print(magic_number)
+# print(magic_number)
 
 def user_input():
     print("Enter 4 digit number".center(90))
@@ -104,10 +104,11 @@ def game(magic_number, attempts: int = 1):
     cows, bulls = lets_check_user_choice(user_choice, magic_number)
     if cows == 4:
         print("You won!".center(90,"!"))
-        print(attempts)
+        print(f"Attempts made: {attempts}".center(90))
         return
     else:
-        print(f"You have got cows {cows} and bulls {bulls}")
+        print(f"You have got {cows} cows and {bulls} bulls.".center(90))
+        print("".center(90,"^"))
         game(magic_number, attempts + 1)
 
 game(magic_number)
