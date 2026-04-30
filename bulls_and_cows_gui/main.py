@@ -2,6 +2,7 @@ import random
 import tkinter as tk
 from collections import Counter
 from pathlib import Path
+import sys
 
 # ================================
 # Bulls and Cows GUI Game
@@ -12,7 +13,12 @@ from pathlib import Path
 
 WINDOW_WIDTH = 768
 WINDOW_HEIGHT = 512
-ASSET_DIR = Path(__file__).parent / "assets"
+def resource_path(relative_path):
+    if getattr(sys, "frozen", False):
+        return Path(sys._MEIPASS) / relative_path
+    return Path(__file__).parent / relative_path
+
+ASSET_DIR = resource_path("assets")
 
 
 def make_magic_number() -> str:
