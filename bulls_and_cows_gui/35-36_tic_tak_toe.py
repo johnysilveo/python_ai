@@ -77,23 +77,29 @@ def is_draw(board):
             return False
     return True
 
-board = create_board()
-symbol = "X"
-while True:
-    print_board(board)
-    move = get_human_move(board, symbol)
-    make_move(board, move, symbol)
-    winner = check_winner(board)
-    if winner:
-        print_board(board)
-        print(f"The winner is {winner}.")
-        break
-    if is_draw(board):
-        print_board(board)
-        print(f"Draw.")
-        break
+def switch_player(symbol):
     if symbol == "X":
-        symbol = "O"
+        return "O"
     else:
-        symbol = "X"
+        return "X"
+
+def play_human_vs_human():
+    board = create_board()
+    symbol = "X"
+    while True:
+        print_board(board)
+        move = get_human_move(board, symbol)
+        make_move(board, move, symbol)
+        winner = check_winner(board)
+        if winner:
+            print_board(board)
+            print(f"The winner is {winner}.")
+            break
+        if is_draw(board):
+            print_board(board)
+            print(f"Draw.")
+            break
+        symbol = switch_player(symbol)
+
+
 
