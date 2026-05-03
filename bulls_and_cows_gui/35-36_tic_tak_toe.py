@@ -127,7 +127,35 @@ def computer_medium(board):
         board[move - 1] = str(move)
     return computer_easy(board)
 
-def computer_hard(board):return
+def minimax(board,depth, is_maximizing):
+    winner = check_winner(board)
+    if winner == "O":
+        return 10 - depth
+    if winner == "X":
+        return depth - 10
+    if is_draw(board):
+        return 0
+
+    if is_maximizing:
+        best_score = -1000
+        for move in available_moves(board):
+            make_move(board, move, "O")
+            score  = minimax(board, depth + 1, False)
+            board[move - 1 ] = str(move)
+            if score > best_score: best_score = score
+        return best_score
+    else:
+        best_score = 1000
+        for move in available_moves(board):
+            make_move(board, move, "X")
+            score = minimax(board, depth + 1, True)
+            board[move - 1 ] = str(move)
+            if score < best_score: best_score = score
+        return best_score
+
+def computer_hard(board):
+    best_score = -1000
+    move = None
 
 
 
