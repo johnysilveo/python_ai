@@ -23,12 +23,7 @@
 # Середній рівень: блокування виграшу гравця.
 # Складний рівень: оптимальний хід, спрямований на перемогу комп'ютера.
 # Під час завершення гри програма пропонує почати гру заново.
-
-
-
-
-
-
+from random import randint
 
 WIN_LINES = [
 (0, 1, 2), (3, 4, 5), (6, 7, 8),
@@ -83,6 +78,13 @@ def switch_player(symbol):
     else:
         return "X"
 
+def available_moves(board):
+    available_moves = []
+    for i in range(9):
+        if board[i] not in ["X", "O"]:
+            available_moves.append(i + 1)
+    return available_moves
+
 def play_human_vs_human():
     board = create_board()
     symbol = "X"
@@ -100,6 +102,35 @@ def play_human_vs_human():
             print(f"Draw.")
             break
         symbol = switch_player(symbol)
+
+#>>>>>>>>>>>>>>>>>>>>>Human VS Computer<<<<<<<<<<<<<<<<<<
+import random
+
+def computer_easy(board):
+    while True:
+        move = random.randint(1,9)
+        if board[move - 1] not in ["X", "O"]:
+            return move
+
+def computer_medium(board):
+    for move in available_moves(board):
+        make_move(board, move, "O")
+        if check_winner(board) == "O":
+            board[move - 1] = str(move)
+            return move
+        board[move -1] = str(move)
+    for move in available_moves(board):
+        make_move(board, move, "X")
+        if check_winner(board) == "X":
+            board[move - 1] = str(move)
+            return move
+        board[move - 1] = str(move)
+    return computer_easy(board)
+
+def computer_hard(board):return
+
+
+
 
 
 
