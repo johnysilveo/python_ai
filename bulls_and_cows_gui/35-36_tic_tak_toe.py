@@ -1,29 +1,6 @@
-# Завдання 6
-# Написати гру "Хрестики-нулики".
-#
-# Гра включає два режими:
-#
-# Людина — Людина
-# Людина — Комп'ютер.
-# Загальна функціональність:
-#
-# Поле: 3x3, клітини позначені номерами 1-9.
-# Правила:
-# Гравці по черзі ставлять "X" або "O".
-# Перемагає гравець, який склав лінію з трьох символів.
-# Якщо поле заповнене, а лінії немає, оголошується нічия.
-# Режими:
-#
-# Людина — Людина:
-# Два гравці вводять свої ходи по черзі.
-# Перевірка коректності введення і стану гри (перемога, нічия).
-# Людина — Комп'ютер:
-# Гравець вводить хід, комп'ютер вибирає клітину:
-# Простий рівень: випадковий вибір.
-# Середній рівень: блокування виграшу гравця.
-# Складний рівень: оптимальний хід, спрямований на перемогу комп'ютера.
-# Під час завершення гри програма пропонує почати гру заново.
 from random import randint
+
+
 
 WIN_LINES = [
 (0, 1, 2), (3, 4, 5), (6, 7, 8),
@@ -85,6 +62,19 @@ def available_moves(board):
             available_moves.append(i + 1)
     return available_moves
 
+def ask_restart():
+    answer = input("Do you want to restart? (y/n) or menu").strip().lower()
+    if answer == "y" or answer == "yes":
+        return True
+    if answer == "n" or answer == "no":
+        return False
+    print("Please restart the computer.")
+    if answer == "menu" or answer == "m":
+        return main_menu()
+    return ask_restart()
+
+#>>>>>>>>>>>>>>>>>>>>>Human VS Human<<<<<<<<<<<<<<<<<<
+
 def play_human_vs_human():
     board = create_board()
     symbol = "X"
@@ -103,12 +93,11 @@ def play_human_vs_human():
             break
         symbol = switch_player(symbol)
 
-#>>>>>>>>>>>>>>>>>>>>>Human VS Computer<<<<<<<<<<<<<<<<<<
-import random
+#>>>>>>>>>>>>>>>>>>>>>Computer<<<<<<<<<<<<<<<<<<
 
 def computer_easy(board):
     while True:
-        move = random.randint(1,9)
+        move = randint(1,9)
         if board[move - 1] not in ["X", "O"]:
             return move
 
@@ -155,7 +144,92 @@ def minimax(board,depth, is_maximizing):
 
 def computer_hard(board):
     best_score = -1000
-    move = None
+    best_move = None
+    for move in available_moves(board):
+        make_move(board, move, "O")
+        score = minimax(board, 0, False)
+        board[move - 1 ] = str(move)
+        if score > best_score:
+            best_score = score
+            best_move = move
+    return best_move
+
+#>>>>>>>>>>>>>>>>>>>>>>>>End Computer<<<<<<<<<<<<<<<<<<<<<
+
+#>>>>>>>>>>>>>>>>>>>>>Human VS Computer<<<<<<<<<<<<<<<<<<
+
+def play_human_vs_computer(difficulty):
+    board = create_board()
+    symbol = "X"
+    while True:
+        print_board(board)
+        move = get_human_move(board, symbol)
+        make_move(board, move, symbol)
+        winner = check_winner(board)
+        if winner:
+            print_board(board)
+            print(f"The winner is {winner}.")
+            break
+        if is_draw(board):
+            print_board(board)
+            print(f"Draw.")
+            break
+        if difficulty == "easy":
+            computer_move = computer_easy(board)
+        elif difficulty == "medium":
+            computer_move = computer_medium(board)
+        elif difficulty == "hard":
+            computer_move = computer_hard(board)
+        make_move(board, computer_move,"O")
+        winner = check_winner(board)
+        if winner:
+            print_board(board)
+            print(f"The winner is {winner}.")
+            break
+        if is_draw(board):
+            print_board(board)
+            print(f"Draw.")
+            break
+
+def main_menu():
+    print("WELCOME TO TIC TSK TOE GAME".center(90,"-"))
+    print("^"*90)
+    print("To play Human vs Human mode enter 1")
+    print("To play Human vs Computer mode enter 2")
+    print("Enter exit or quit or q")
+    while True:
+        choice = input("Enter your choice: ").strip().lower()
+        if choice == "exit" or choice == "q" or choice == "quit":
+            break
+        elif choice == "1":
+            play_human_vs_human()
+            if not ask_restart():
+                break
+        elif choice == "2":
+            print("For easy enter 1")
+            print("For medium enter 2")
+            print("For hard enter 3")
+            difficulty_choice = input("Enter your choice: ").strip()
+            if difficulty_choice == "1":
+                play_human_vs_computer("easy")
+                if not ask_restart():
+                    break
+            elif difficulty_choice == "2":
+                play_human_vs_computer("medium")
+                if not ask_restart():
+                    break
+            elif difficulty_choice == "3":
+                play_human_vs_computer("hard")
+                if not ask_restart():
+                    break
+            else:
+                print("Please enter a valid choice. Or restart your computer.")
+        else:
+            print("Please enter a valid choice. Or restart your computer.")
+
+main_menu()
+
+
 
 
 
