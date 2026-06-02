@@ -12,11 +12,13 @@ def create_board():
     return ["1","2","3","4","5","6","7","8","9"]
 
 def print_board(board):
+    print("*************")
     for i in range(0,9,3):
         print(f"{board[i]} | {board[i+1]} | {board[i+2]}")
         if i < 6:
             print("--+---+--")
-
+    print("*************")
+    
 def get_human_move(board, symbol):
     print("Enter number of section where you want to make a move.")
     print(f"You are {symbol}")
@@ -191,11 +193,45 @@ def play_human_vs_computer(difficulty):
             print(f"Draw.")
             break
 
+def play_computer_vs_computer(difficulty):
+    board = create_board()
+    symbol = "X"
+    while True:
+        print_board(board)
+        move = computer_hard(board)
+        make_move(board, move, symbol)
+        winner = check_winner(board)
+        if winner:
+            print_board(board)
+            print(f"The winner is {winner}.")
+            break
+        if is_draw(board):
+            print_board(board)
+            print(f"Draw.")
+            break
+        if difficulty == "easy":
+            computer_move = computer_easy(board)
+        elif difficulty == "medium":
+            computer_move = computer_medium(board)
+        elif difficulty == "hard":
+            computer_move = computer_hard(board)
+        make_move(board, computer_move, "O")
+        winner = check_winner(board)
+        if winner:
+            print_board(board)
+            print(f"The winner is {winner}.")
+            break
+        if is_draw(board):
+            print_board(board)
+            print(f"Draw.")
+            break
+
 def main_menu():
     print("WELCOME TO TIC TSK TOE GAME".center(90,"-"))
     print("^"*90)
     print("To play Human vs Human mode enter 1")
     print("To play Human vs Computer mode enter 2")
+    print("To play Computer vs Computer mode enter 3")
     print("Enter exit or quit or q")
     while True:
         choice = input("Enter your choice: ").strip().lower()
@@ -224,6 +260,26 @@ def main_menu():
                     break
             else:
                 print("Please enter a valid choice. Or restart your computer.")
+        elif choice == "3":
+            print("For easy enter 1")
+            print("For medium enter 2")
+            print("For hard enter 3")
+            difficulty_choice = input("Enter your choice: ").strip()
+            if difficulty_choice == "1":
+                play_human_vs_computer("easy")
+                if not ask_restart():
+                    break
+            elif difficulty_choice == "2":
+                play_human_vs_computer("medium")
+                if not ask_restart():
+                    break
+            elif difficulty_choice == "3":
+                play_computer_vs_computer("hard")
+                if not ask_restart():
+                    break
+            else:
+                print("Please enter a valid choice. Or restart your computer.")
+
         else:
             print("Please enter a valid choice. Or restart your computer.")
 

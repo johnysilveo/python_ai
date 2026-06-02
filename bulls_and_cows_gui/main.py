@@ -265,50 +265,6 @@ class BullsAndCowsApp:
         self.clear_screen()
         self.set_background("how_to_play_screen.png")
 
-        # # Cover old text and print instructions matching this homework version.
-        # self.canvas.create_rectangle(95, 118, 675, 410, fill="#fff1d2", outline="#b8844b", width=4)
-        # self.canvas.create_text(
-        #     384,
-        #     70,
-        #     # text="HOW TO PLAY",
-        #     font=("Arial", 30, "bold"),
-        #     fill="#4a2615",
-        # )
-        # self.canvas.create_text(
-        #     384,
-        #     155,
-        #     text="1. The computer chooses a 4-digit number.",
-        #     font=("Arial", 16, "bold"),
-        #     fill="#2e2118",
-        # )
-        # self.canvas.create_text(
-        #     384,
-        #     205,
-        #     text="2. Enter your 4-digit guess and press CHECK.",
-        #     font=("Arial", 16, "bold"),
-        #     fill="#2e2118",
-        # )
-        # self.canvas.create_text(
-        #     384,
-        #     265,
-        #     text="Cows = correct digit in the correct position.",
-        #     font=("Arial", 16, "bold"),
-        #     fill="#2e6b25",
-        # )
-        # self.canvas.create_text(
-        #     384,
-        #     315,
-        #     text="Bulls = correct digit, but in the wrong position.",
-        #     font=("Arial", 16, "bold"),
-        #     fill="#8b3e1f",
-        # )
-        # self.canvas.create_text(
-        #     384,
-        #     370,
-        #     text="Win when you get 4 cows.",
-        #     font=("Arial", 18, "bold"),
-        #     fill="#2e2118",
-        # )
 
         back_button = self.make_button("BACK", self.show_menu, width=12)
         self.canvas.create_window(348, 420, window=back_button)
