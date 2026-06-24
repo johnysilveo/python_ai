@@ -28,16 +28,16 @@ def even_list(numbers):
 result_even = even_list(ls)
 
 print(f"Original list".center(90,"="))
-for index, number in enumerate(ls, start=1):
+for index, number in enumerate(sorted(ls), start=1):
     print(f"{number:4}", end="")
     if index % 10 == 0:
         print()
 print(f"Even list".center(90,"="))
-for index, number in enumerate(result_even, start=1):
+for index, number in enumerate(sorted(result_even), start=1):
     print(f"{number:4}", end="")
     if index % 10 == 0:
         print()
-
+print()
 
 @timer
 def in_range(start,end):
@@ -50,11 +50,44 @@ def in_range(start,end):
 odd_ls = in_range(0,100)
 
 print(f"Odd list".center(90,"="))
-for index, number in enumerate(odd_ls, start=1):
+for index, number in enumerate(sorted(odd_ls,reverse=True), start=1):
     print(f"{number:4}", end="")
     if index % 10 == 0:
         print()
+print()
 print(f"Number of fund odd is: {len(odd_ls)}".center(90,"="))
+
+
+class MessageDecorator:
+    def __init__(self, user_type):
+        self.user_type = user_type
+
+    def __call__(self, func):
+
+        def wrapper():
+            message = func()
+            return f"[{self.user_type}] {message}"
+
+        return wrapper
+
+def order_message():
+    return "Ur order is accepted!"
+
+messages = [
+    MessageDecorator("ADMIN")(order_message),
+    MessageDecorator("MANAGER")(order_message),
+    MessageDecorator("CLIENT")(order_message)
+]
+
+for message in messages:
+    print()
+    print("*" *90)
+    print(message().center(90,"*"))
+    print("*" *90)
+
+
+
+
 
 
 
